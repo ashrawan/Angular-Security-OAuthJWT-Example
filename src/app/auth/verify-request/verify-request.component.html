@@ -1,0 +1,79 @@
+<div class="container">
+
+    <div class="mt-2">
+        <a class="navbar-brand fw-bold fs-4" [routerLink]="'/'">{{appBrandName}}</a>
+    </div>
+
+    <div class="row">
+        <div class="card border-0 shadow rounded-3 my-3">
+            <div class="card-body p-4 p-sm-5">
+
+                <div *ngIf="loading" class="text-center">
+                    <app-loading [repeat]="3" [width]="'5'" [height]="'5'"></app-loading>
+                </div>
+
+                <div *ngIf="responseMessage && responseMessage.length > 0" class="alert"
+                    [ngClass]="hasError? 'alert-danger': 'alert-primary' " role="alert">
+                    {{responseMessage}}
+                </div>
+
+                <ng-container *ngIf="isProcessVerifyEmail">
+
+                    <div class="text-center">
+                        <p>  </p>
+                        <button class="btn btn-primary btn-small" [routerLink]="['/login']"
+                            routerLinkActive="router-link-active">Go to Login</button>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="isProcessResetPassword">
+
+                    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                        <h5 class="text-center mb-3 fw-light fs-5">Reset Password</h5>
+
+                        <form [formGroup]="setNewPasswordForm" (ngSubmit)="onNewPasswordSet()">
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                    formControlName="password"
+                                    [ngClass]="{ 'is-invalid': isNPFormSubmitted && formControls.password.errors }"
+                                    required />
+                                <label for="floatingPassword"><span class="text-danger">*</span> Password</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPasswordConfirm"
+                                    placeholder="Confirm Password" formControlName="passwordConfirm"
+                                    [ngClass]="{ 'is-invalid': isNPFormSubmitted && formControls.passwordConfirm.errors }"
+                                    required>
+                                <label for="floatingPasswordConfirm"><span class="text-danger">*</span> Confirm
+                                    Password</label>
+
+                                <span class="text-danger"
+                                    *ngIf="formControls.passwordConfirm.errors?.confirmedValidator">
+                                    Password must match </span>
+
+                            </div>
+
+
+                            <div class="d-grid mb-2">
+                                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit"
+                                    [disabled]="setNewPasswordForm.invalid || loading">
+                                    Update
+                                    <app-loading *ngIf="loading" [repeat]="3"></app-loading>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </ng-container>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

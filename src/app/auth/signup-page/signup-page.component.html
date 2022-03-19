@@ -1,0 +1,116 @@
+<div class="container">
+
+    <div class="mt-2">
+        <a class="navbar-brand fw-bold fs-4" [routerLink]="'/'">{{appBrandName}}</a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card flex-row my-3 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex w-50">
+                    <img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/400x600/343a40/6c757d"
+                        alt="..." />
+                </div>
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-3 fw-light fs-5">Register</h5>
+
+                    <div *ngIf="responseMessage && responseMessage.length > 0" class="alert"
+                        [ngClass]="hasError? 'alert-danger': 'alert-primary' " role="alert">
+                        {{responseMessage}}
+                    </div>
+
+                    <form [formGroup]="registrationForm" (ngSubmit)="onRegisterSubmit()">
+
+                        <div class="form-floating mb-3">
+                            <input type="username" id="floatingFullName" class="form-control" placeholder="Username"
+                                formControlName="fullName"
+                                [ngClass]="{ 'is-invalid': isSubmitted && formControls.fullName.errors }" required
+                                autofocus />
+                            <label for="floatingFullName"><span class="text-danger">*</span> Full name </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingInputEmail"
+                                placeholder="name@example.com" formControlName="email"
+                                [ngClass]="{ 'is-invalid': isSubmitted && formControls.email.errors }" required />
+                            <label for="floatingInputEmail"><span class="text-danger">*</span> Email address</label>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                formControlName="password"
+                                [ngClass]="{ 'is-invalid': isSubmitted && formControls.password.errors }" required />
+                            <label for="floatingPassword"><span class="text-danger">*</span> Password</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPasswordConfirm"
+                                placeholder="Confirm Password" formControlName="passwordConfirm"
+                                [ngClass]="{ 'is-invalid': isSubmitted && formControls.passwordConfirm.errors }"
+                                required>
+                            <label for="floatingPasswordConfirm"><span class="text-danger">*</span> Confirm
+                                Password</label>
+
+                            <span class="text-danger" *ngIf="formControls.passwordConfirm.errors?.confirmedValidator">
+                                Password must match </span>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" [ngClass]="isTermsChecked ? 'is-valid' : 'is-invalid'"
+                                    type="checkbox" [(ngModel)]="isTermsChecked" [ngModelOptions]="{standalone: true}"
+                                    [checked]="isTermsChecked" id="validCheck3" aria-describedby="validCheck3Feedback"
+                                    required>
+                                <label class="form-check-label" for="validCheck3">
+                                    Agree to terms and conditions <a href="" (click)="false">terms and conditions</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid mb-2">
+
+                            <button class="btn btn btn-primary fw-bold text-uppercase" type="submit"
+                                [disabled]="!isTermsChecked || loading">
+                                Register
+                                <app-loading *ngIf="loading" [repeat]="3"></app-loading>
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <a class="d-block text-center mt-2" [routerLink]="'/login'">Have an account? Log In</a>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid mb-2">
+                        <button class="btn btn-google btn-login text-uppercase fw-bold"
+                            (click)="onOAuth2SocialButtonClick(OAuth2Provider.GOOGLE)">
+                            <i class="bi bi-google me-2"></i> Sign up with Google
+                        </button>
+                    </div>
+                    <div class="d-grid mb-2">
+                        <button class="btn btn-facebook btn-login text-uppercase fw-bold"
+                            (click)="onOAuth2SocialButtonClick(OAuth2Provider.FACEBOOK)">
+                            <i class="bi bi-facebook me-2"></i> Sign up with Facebook
+                        </button>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-github btn-login text-uppercase fw-bold"
+                            (click)="onOAuth2SocialButtonClick(OAuth2Provider.GITHUB)">
+                            <i class="bi bi-github me-2"></i> Sign up with Github
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center text-muted mb-3">
+    Copyright &copy; 2021 &mdash;
+    <a class="link" [routerLink]="'/'">{{appBrandName}}</a>
+</div>

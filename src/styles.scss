@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+// @import "~bootstrap/dist/css/bootstrap.css";
+@import '~bootstrap-icons/font/bootstrap-icons.scss';
+
+//@import "~font-awesome/css/font-awesome.css";
+
+body {
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.navbar-cover-wrapper {
+    background: #ebeef1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f2f6f9, #ebeef1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f2f6f9, #ebeef1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
+  
+.btn-google {
+    color: white !important;
+    background-color: #ea4335;
+}
+
+.btn-facebook {
+    color: white !important;
+    background-color: #3b5998;
+}
+
+.btn-github {
+    color: white !important;
+    background-color: #333333;
+}

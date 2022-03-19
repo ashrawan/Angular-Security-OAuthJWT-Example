@@ -1,0 +1,132 @@
+<div class="container">
+
+    <div class="mt-2">
+        <a class="navbar-brand fw-bold fs-4" [routerLink]="'/'">{{appBrandName}}</a>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-3">
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-2 fw-light fs-4">Sign In</h5>
+
+                    <div *ngIf="loginResponseMessage && loginResponseMessage.length > 0" class="alert"
+                        [ngClass]="hasError? 'alert-danger': 'alert-primary' " role="alert">
+                        {{loginResponseMessage}}
+                    </div>
+
+                    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingEmail" placeholder="Email"
+                                formControlName="email"
+                                [ngClass]="{ 'is-invalid': isSubmitted && formControls.email.errors }" required>
+                            <label for="floatingEmail"><span class="text-danger">*</span> Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                formControlName="password"
+                                [ngClass]="{ 'is-invalid': isSubmitted && formControls.password.errors }" required>
+                            <label for="floatingPassword"><span class="text-danger">*</span> Password</label>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" formControlName="rememberMe" id="rememberPasswordCheck">
+                            <label class="form-check-label" for="rememberPasswordCheck">
+                                Remember password
+                            </label>
+
+                            <a class="d-flex justify-content-end mt-2 small" href="javascript: void(0);"
+                                (click)="openForgotPasswordmodel()">Forgot Password</a>
+
+                        </div>
+                        <div class="d-grid mb-2">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" [disabled]="loading">
+                                Sign in
+                                <app-loading *ngIf="loading" [repeat]="3"></app-loading>
+                            </button>
+                        </div>
+
+                        <a class="d-block text-center mt-2" [routerLink]="'/register'">Not a member yet?
+                            Register</a>
+
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="d-grid mb-2">
+                        <button class="btn btn-google btn-login text-uppercase fw-bold"
+                            (click)="onOAuth2SocialButtonClick(OAuth2Provider.GOOGLE)">
+                            <i class="bi bi-google me-2"></i> Sign in with Google
+                        </button>
+                    </div>
+                    <div class="d-grid mb-2">
+                        <button class="btn btn-facebook btn-login text-uppercase fw-bold"
+                            (click)="onOAuth2SocialButtonClick(OAuth2Provider.FACEBOOK)">
+                            <i class="bi bi-facebook me-2"></i> Sign in with Facebook
+                        </button>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-github btn-login text-uppercase fw-bold"
+                            (click)="onOAuth2SocialButtonClick(OAuth2Provider.GITHUB)">
+                            <i class="bi bi-github me-2"></i> Sign in with Github
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center text-muted mb-3">
+    Copyright &copy; 2021 &mdash;
+    <a class="link" [routerLink]="'/'">{{appBrandName}}</a>
+</div>
+
+
+
+
+<!-- Forgot password modal here -->
+<ng-template #passwordResetContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Forgot Password</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div *ngIf="resetPasswordResponseMessage && resetPasswordResponseMessage.length > 0" class="alert"
+            [ngClass]="hasError? 'alert-danger': 'alert-primary' " role="alert">
+            {{resetPasswordResponseMessage}}
+        </div>
+
+
+        <form role="form" (ngSubmit)="processForgotPasswordReset()" novalidate="novalidate">
+            <label for="floatingForgotPasswordEmail" class="form-label">Enter email address</label>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingForgotPasswordEmail"
+                    placeholder="e.g. name@example.com" [(ngModel)]="emailAddressToResetPassword"
+                    [ngModelOptions]="{standalone: true}" required>
+                <label for="floatingForgotPasswordEmail"> e.g. name@example.com</label>
+            </div>
+
+            <div class="col-12 text-end">
+                <button type="submit" class="col-6 btn btn btn-primary rounded-pill" [disabled]="loading">
+                    Send reset link
+                    <app-loading *ngIf="loading" [repeat]="1"></app-loading>
+                </button>
+            </div>
+
+        </form>
+
+
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')">close</button>
+    </div> -->
+
+</ng-template>
+
+

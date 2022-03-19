@@ -1,0 +1,64 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-cover-wrapper shadow-sm" id="mainNav">
+    <div class="container px-5">
+        <a class="navbar-brand fw-bold fs-4" href="/">{{appBrandName}}</a>
+        <button class="navbar-toggler" (click)="toggleNavbarClass()" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span><i class="bi bi-list"></i></span>
+        </button>
+        <div [ngClass]="isNavCollapse ? 'collapse' : 'expand' " class="navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                <li class="nav-item"><a [routerLink]="'/'" [routerLinkActive]="'active'"
+                        class="nav-link me-lg-3">Home</a></li>
+                <li class="nav-item"><a [routerLink]="'/solutions'" [routerLinkActive]="'active'"
+                        class="nav-link me-lg-3">Solutions</a></li>
+                <li class="nav-item"><a [routerLink]="'/contact'" [routerLinkActive]="'active'"
+                        class="nav-link me-lg-3">Contact</a></li>
+            </ul>
+
+            <ng-container *ngIf="isLoggedIn; else defaultLoginSection">
+                <div ngbDropdown class="dropdown">
+
+                    <a href="javascript: void(0);"
+                        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                        id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                        <span class="link-secondary text-muted pe-1">
+                            <strong *ngIf="firstName">{{firstName}}</strong>
+                            <strong *ngIf="!firstName" class="text-danger">invalid-user</strong>
+                        </span>
+                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    </a>
+
+                    <!-- Temporary fix for css "dropdown-menu-end" not working in ngBootstrap [ngStyle]="{'right': '0'}"  -->
+                    <ul ngbDropdownMenu class="dropdown-menu text-small shadow dropdown-menu-end"
+                        [ngStyle]="{'right': '0'}"
+                        aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" [routerLink]="'/dashboard'">Dashboard</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'/dashboard/settings'">Settings</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'/dashboard/profile'">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><button class="dropdown-item" (click)="logout()">Log out</button></li>
+                    </ul>
+                </div>
+
+            </ng-container>
+
+
+            <ng-template #defaultLoginSection>
+                <div>
+                    <a class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" role="button" [routerLink]="'/login'"
+                        [routerLinkActive]="'active'">
+                        <span class="d-flex align-items-center">
+                            <i class="bi bi-fingerprint"> Login</i>
+                        </span>
+                    </a>
+                </div>
+            </ng-template>
+
+
+        </div>
+    </div>
+</nav>

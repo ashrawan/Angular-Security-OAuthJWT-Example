@@ -1,0 +1,5 @@
+<ng-container *ngFor="let i of [].constructor(repeat)">
+    <span class="spinner-grow mx-1" [ngClass]="[isSmall? 'spinner-grow-sm' : '', cssClass? cssClass : '']"
+        [ngStyle]="{'width': width, 'height': height}" role="status" aria-hidden="true">
+    </span>
+</ng-container>
