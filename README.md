@@ -1,5 +1,5 @@
 
-# Angular Security OAuth2 and Custom JWT Starter Example
+# Angular Security with OAuth2 and Custom JWT
 
 - Module Based implementation (auth, core, features, shared), Angular 11 with Bootstrap 5
 - Custom register/login, password-reset included
