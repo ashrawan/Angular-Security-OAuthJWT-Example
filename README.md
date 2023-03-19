@@ -1,8 +1,15 @@
 
-# Angular Customized Starter Example
+# Angular Security OAuth2 and Custom JWT Starter Example
 
-## Angular 11 Starter Project with Bootstrap 5 
-__Basic Setup - Main Structure:__
+- Module Based implementation (auth, core, features, shared), Angular 11 with Bootstrap 5
+- Custom register/login, password-reset included
+- Public & Authenticated Pages, param based routing and form validations
+
+ Link:
+- [ ] Backend: https://github.com/ashrawan/Spring-Security-OAuth-Example
+- [x] Viewing Frontend: https://github.com/ashrawan/Angular-Security-OAuthJWT-Example
+
+## __Basic Setup - Main Structure:__
 
 - __Auth Module__ : Login, Signup and authentication related services
 - __Core Module__ : Global Constants/Utils/Models, All Services, URL Constant etc. (anything global/abstract/core, and reusable tools/constant)
